@@ -1,0 +1,121 @@
+﻿@model Student
+
+@{
+    ViewData["Title"] = "Student Result";
+}
+
+<style>
+    body {
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        background-color: #f8f9fa;
+        color: #333;
+    }
+
+    .container {
+        padding: 20px;
+    }
+
+    h1 {
+        color: #007bff;
+        margin-bottom: 30px;
+        text-align: center;
+    }
+
+    .result-container {
+        background-color: #fff;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+        padding: 30px;
+        margin-bottom: 20px;
+    }
+
+    .table {
+        width: 100%;
+        margin-bottom: 20px;
+        border-collapse: collapse;
+    }
+
+    .table th,
+    .table td {
+        padding: 12px 15px;
+        text-align: left;
+        border-bottom: 1px solid #ddd;
+    }
+
+    .table th {
+        font-weight: bold;
+        color: #555;
+    }
+
+    .table tbody tr:hover {
+        background-color: #f5f5f5;
+    }
+
+    .highlight {
+        font-weight: bold;
+        color: #dc3545;
+    }
+
+    p {
+        font-size: 18px;
+        text-align: center;
+        color: #6c757d;
+    }
+
+    /* Responsive Design */
+    media (max-width: 768px) {
+        .container {
+            padding: 10px;
+        }
+
+        .result-container {
+            padding: 20px;
+        }
+
+        .table th,
+        .table td {
+            padding: 8px 10px;
+            font-size: 14px;
+        }
+    }
+</style>
+
+<div class="container">
+    <h1 class="text-center">Rozhn Terminal Result</h1>
+
+    @if (Model != null)
+    {
+        <div class="result-container">
+            <table class="table">
+                <tr>
+                    <th>Serial</th>
+                    <td>@Model.Serial</td>
+                </tr>
+                <tr>
+                    <th>Term No</th>
+                    <td>@Model.TermNo</td>
+                </tr>
+                <tr>
+                    <th>Student Name</th>
+                    <td>@Model.StudentName</td>
+                </tr>
+                <tr>
+                    <th>Percentage</th>
+                    <td><span class="highlight">@Model.Percentage</span></td>
+                </tr>
+                <tr>
+                    <th>Result</th>
+                    <td><span class="highlight">@Model.Result</span></td>
+                </tr>
+                <tr>
+                    <th>Grade</th>
+                    <td>@Model.Grade</td>
+                </tr>
+            </table>
+        </div>
+    }
+    else
+    {
+        <p>No results found.</p>
+    }
+</div>

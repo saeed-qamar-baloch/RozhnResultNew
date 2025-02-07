@@ -1,0 +1,116 @@
+﻿@model List<Result.Models.Student>
+
+@{
+    ViewData["Title"] = "Search Results";
+}
+
+<style>
+    /* General Styles */
+    body {
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        background-color: #f8f9fa;
+        color: #333;
+    }
+
+    .container {
+        padding: 20px;
+    }
+
+    h1 {
+        color: #007bff;
+        margin-bottom: 30px;
+        text-align: center;
+    }
+
+    /* Student Card Styles */
+    .student-card {
+        border: 1px solid #ddd;
+        border-radius: 10px;
+        padding: 20px;
+        margin-bottom: 20px;
+        background-color: #fff;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+        transition: transform 0.2s ease-in-out;
+        text-align: center; /* Center the content within the card */
+    }
+
+        .student-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+        }
+
+    .student-card h4 {
+        color: #28a745;
+        margin-bottom: 10px;
+         text-align: center; /* Center the heading text */
+    }
+
+    .student-card p {
+        margin-bottom: 8px;
+        font-size: 16px;
+    }
+
+    .student-card strong {
+        font-weight: 600;
+        color: #555;
+    }
+
+    /* Highlighted Text */
+    .highlight {
+        font-weight: bold;
+        color: #dc3545; /* Red color for important information */
+    }
+
+    /* No Results Message */
+    p {
+        font-size: 18px;
+        text-align: center;
+        color: #6c757d;
+    }
+
+    /* Media Query for Responsiveness */
+    media (max-width: 768px) {
+        .container {
+            padding: 10px;
+        }
+
+        .student-card {
+            margin-left: 0;
+            margin-right: 0;
+            padding: 15px;
+        }
+
+        .student-card h4 {
+            font-size: 20px;
+        }
+
+        .student-card p {
+            font-size: 14px;
+        }
+    }
+</style>
+
+
+<div class="container">
+    <h1>Rozhn Terminal Result 2025</h1>
+    <h1>Search Results</h1>
+
+    @if (Model != null && Model.Count > 0)
+    {
+        @foreach (var student in Model)
+        {
+            <div class="student-card">
+                <h4>@student.StudentName</h4>
+                <p><strong>Father:</strong> @student.Father</p>
+                <p><strong>Teacher:</strong> @student.Teacher</p>
+                <p><strong>Class:</strong> @student.Class</p>
+                <p><strong>Percentage:</strong> <span class="highlight">@student.Percentage</span></p>
+                <p><strong>Result:</strong> <span class="highlight">@student.Result</span></p>
+            </div>
+        }
+    }
+    else
+    {
+        <p>No results found.</p>
+    }
+</div>
