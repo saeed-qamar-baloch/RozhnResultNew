@@ -1,22 +1,19 @@
-# Step 1: Use an official .NET image as a base
-FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS base
-WORKDIR /app
-EXPOSE 5000
 
-# Step 2: Use the SDK image to build the app
+
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
+ARG BUILD_CONFIGURATION=Release
 WORKDIR /src
-
-# Copy your project file to the container and restore dependencies
-COPY ["Result.csproj", "./"]
+COPY ["Result.csproj", "."]
 RUN dotnet restore "./Result.csproj"
-
-# Step 3: Copy the entire project and publish the application
 COPY . .
-RUN dotnet publish -c Release -o /app
+WORKDIR "/src/."
+RUN dotnet build "./Result.csproj" -c $BUILD_CONFIGURATION -o /app/build
 
-# Step 4: Define the final runtime image to run the app
+FROM build AS publish
+ARG BUILD_CONFIGURATION=Release
+RUN dotnet publish "./Result.csproj" -c $BUILD_CONFIGURATION -o /app/publish /p:UseAppHost=false
+
 FROM base AS final
 WORKDIR /app
-COPY --from=build /app .
+COPY --from=publish /app/publish .
 ENTRYPOINT ["dotnet", "Result.dll"]
