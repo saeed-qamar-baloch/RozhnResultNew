@@ -17,7 +17,8 @@ namespace Result.Controllers
             // Load data (ideally, do this once on application start)
             if (_students == null)
             {
-                string excelFilePath = Path.Combine(Directory.GetCurrentDirectory(), "Models", "StudentsResult.xlsx");
+                string excelFilePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "Data", "StudentsResult.xlsx");
+
                 _students = LoadStudentData(excelFilePath, "Sheet1");
             }
         }

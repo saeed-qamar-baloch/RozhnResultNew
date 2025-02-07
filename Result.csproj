@@ -16,4 +16,8 @@
     <PackageReference Include="OfficeOpenXml.Core.ExcelPackage" Version="1.0.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Include="wwwroot\Data\StudentsResult.xlsx" />
+  </ItemGroup>
+
 </Project>
