@@ -99,9 +99,56 @@
                     <th>Student Name</th>
                     <td>@Model.StudentName</td>
                 </tr>
+
+                <tr>
+                    <th>1st Month</th>
+                    <td>@Model.Month1</td>
+                </tr>
+
+                <tr>
+                    <th>2nd Month</th>
+                    <td>@Model.Month2</td>
+                </tr>
+
+                <tr>
+                    <th>Viva</th>
+                    <td>@Model.Viva</td>
+                </tr>
+                <tr>
+                    <th>Attendance/ Book Review</th>
+                    <td>@Model.AttendBookReview</td>
+                </tr>
+
+                <tr>
+                    <th>Assignments</th>
+                    <td>@Model.AssignmentFacilitators</td>
+                </tr>
+
+                <tr>
+                    <th>Written</th>
+                    <td>@Model.Written</td>
+                </tr>
+
+                <tr>
+                    <th>Wordlist</th>
+                    <td>@Model.Wordlist</td>
+                </tr>
+
+                <tr>
+                    <th>Total Marks</th>
+                    <td>@Model.Total</td>
+                </tr>
+
+                <tr>
+                    <th>Obtained</th>
+                    <td>@Model.Obtained</td>
+                </tr>
+
                 <tr>
                     <th>Percentage</th>
-                    <td><span class="highlight">@Model.Percentage</span></td>
+                    <td>
+                    <td><span class="highlight">@($"{Model.Percentage:0.00}%")</span></td>
+                    </td>
                 </tr>
                 <tr>
                     <th>Result</th>

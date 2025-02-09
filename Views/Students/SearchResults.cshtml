@@ -13,41 +13,46 @@
     }
 
     .container {
+        max-width: 900px;
+        margin: 0 auto;
         padding: 20px;
+        text-align: center;
     }
 
     h1 {
         color: #007bff;
-        margin-bottom: 30px;
-        text-align: center;
+        margin-bottom: 20px;
+        font-size: 28px;
+        font-weight: 700;
     }
 
     /* Student Card Styles */
     .student-card {
-        border: 1px solid #ddd;
+        background-color: #fff;
         border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         padding: 20px;
         margin-bottom: 20px;
-        background-color: #fff;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
-        transition: transform 0.2s ease-in-out;
-        text-align: center; /* Center the content within the card */
+        transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+        text-align: left;
     }
 
-        .student-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
-        }
+    .student-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+    }
 
     .student-card h4 {
         color: #28a745;
         margin-bottom: 10px;
-         text-align: center; /* Center the heading text */
+        font-size: 22px;
+        text-align: center;
     }
 
     .student-card p {
-        margin-bottom: 8px;
+        margin: 6px 0;
         font-size: 16px;
+        line-height: 1.4;
     }
 
     .student-card strong {
@@ -58,25 +63,24 @@
     /* Highlighted Text */
     .highlight {
         font-weight: bold;
-        color: #dc3545; /* Red color for important information */
+        color: #dc3545;
     }
 
     /* No Results Message */
-    p {
+    .no-results {
         font-size: 18px;
         text-align: center;
         color: #6c757d;
+        margin-top: 20px;
     }
 
-    /* Media Query for Responsiveness */
+    /* Responsive Design */
     media (max-width: 768px) {
         .container {
             padding: 10px;
         }
 
         .student-card {
-            margin-left: 0;
-            margin-right: 0;
             padding: 15px;
         }
 
@@ -90,7 +94,6 @@
     }
 </style>
 
-
 <div class="container">
     <h1>Rozhn Terminal Result 2025</h1>
     <h1>Search Results</h1>
@@ -102,15 +105,27 @@
             <div class="student-card">
                 <h4>@student.StudentName</h4>
                 <p><strong>Father:</strong> @student.Father</p>
-                <p><strong>Teacher:</strong> @student.Teacher</p>
-                <p><strong>Class:</strong> @student.Class</p>
+                <p><strong>Serial:</strong> @student.Serial</p>
+                <p><strong>Term No:</strong> @student.TermNo</p>
+                <p><strong>1st Month:</strong> @student.Month1</p>
+                <p><strong>2nd Month:</strong> @student.Month2</p>
+                <p><strong>Viva:</strong> @student.Viva</p>
+                <p><strong>Attendance/ Book Review:</strong> @student.AttendBookReview</p>
+                <p><strong>Assignments:</strong> @student.AssignmentFacilitators</p>
+                <p><strong>Debate:</strong> @student.Debate</p>
+                <p><strong>Performance:</strong> @student.Performance</p>
+                <p><strong>Written:</strong> @student.Written</p>
+                <p><strong>Wordlist:</strong> @student.Wordlist</p>
+                <p><strong>Total Marks:</strong> @student.Total</p>
+                <p><strong>Obtained:</strong> @student.Obtained</p>
                 <p><strong>Percentage:</strong> <span class="highlight">@student.Percentage</span></p>
                 <p><strong>Result:</strong> <span class="highlight">@student.Result</span></p>
+                <p><strong>Grade:</strong> @student.Grade</p>
             </div>
         }
     }
     else
     {
-        <p>No results found.</p>
+        <p class="no-results">No results found.</p>
     }
 </div>

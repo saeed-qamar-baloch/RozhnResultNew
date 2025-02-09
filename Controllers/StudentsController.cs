@@ -14,11 +14,10 @@ namespace Result.Controllers
 
         public StudentsController()
         {
-            // Load data (ideally, do this once on application start)
+            // Load data once on application start
             if (_students == null)
             {
                 string excelFilePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "Data", "StudentsResult.xlsx");
-
                 _students = LoadStudentData(excelFilePath, "Sheet1");
             }
         }
@@ -29,22 +28,22 @@ namespace Result.Controllers
 
             try
             {
-                ExcelPackage.LicenseContext = LicenseContext.NonCommercial; // or LicenseContext.Commercial
+                ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
                 FileInfo fileInfo = new FileInfo(filePath);
+
                 using (ExcelPackage package = new ExcelPackage(fileInfo))
                 {
-
                     ExcelWorksheet worksheet = package.Workbook.Worksheets[sheetName];
 
                     if (worksheet == null)
                     {
                         Console.WriteLine($"Worksheet '{sheetName}' not found.");
-                        return students; // Return empty list if worksheet not found
+                        return students;
                     }
 
                     int rowCount = worksheet.Dimension?.Rows ?? 0;
 
-                    for (int row = 2; row <= rowCount; row++) // Start from row 2
+                    for (int row = 2; row <= rowCount; row++) // Start from row 2 (assuming row 1 is headers)
                     {
                         try
                         {
@@ -52,25 +51,29 @@ namespace Result.Controllers
                             {
                                 Serial = worksheet.Cells[row, 1].Value?.ToString() ?? "",
                                 TermNo = worksheet.Cells[row, 2].Value?.ToString() ?? "",
-                                Date = DateTime.TryParse(worksheet.Cells[row, 3].Value?.ToString(), out DateTime dateValue) ? dateValue : DateTime.Now,
+                                // Kept as string
                                 StudentName = worksheet.Cells[row, 4].Value?.ToString() ?? "",
                                 Father = worksheet.Cells[row, 5].Value?.ToString() ?? "",
                                 Teacher = worksheet.Cells[row, 6].Value?.ToString() ?? "",
                                 Class = worksheet.Cells[row, 8].Value?.ToString() ?? "",
-                                Month1 = double.TryParse(worksheet.Cells[row, 9].Value?.ToString(), out double m1) ? m1 : 0,
-                                Month2 = double.TryParse(worksheet.Cells[row, 10].Value?.ToString(), out double m2) ? m2 : 0,
-                                Written = double.TryParse(worksheet.Cells[row, 11].Value?.ToString(), out double written) ? written : 0,
-                                Wordlist = double.TryParse(worksheet.Cells[row, 12].Value?.ToString(), out double wordlist) ? wordlist : 0,
-                                Viva = double.TryParse(worksheet.Cells[row, 13].Value?.ToString(), out double viva) ? viva : 0,
-                                PresentConver = double.TryParse(worksheet.Cells[row, 14].Value?.ToString(), out double presentConver) ? presentConver : 0,
-                                AttendBookReview = double.TryParse(worksheet.Cells[row, 15].Value?.ToString(), out double attendBookReview) ? attendBookReview : 0,
-                                AssignmentFacilitators = worksheet.Cells[row, 16].Value?.ToString() ?? "",
-                                Total = double.TryParse(worksheet.Cells[row, 21].Value?.ToString(), out double total) ? total : 0,
-                                Obtained = double.TryParse(worksheet.Cells[row, 22].Value?.ToString(), out double obtained) ? obtained : 0,
-                                Percentage = worksheet.Cells[row, 23].Value?.ToString() ?? "",
+                                Month1 = worksheet.Cells[row, 9].Value?.ToString() ?? "",
+                                Month2 = worksheet.Cells[row, 10].Value?.ToString() ?? "",
+                                Written = worksheet.Cells[row, 11].Value?.ToString() ?? "",
+                                Wordlist = worksheet.Cells[row, 12].Value?.ToString() ?? "",
+                                Viva = worksheet.Cells[row, 13].Value?.ToString() ?? "",
+                                PresentConver = worksheet.Cells[row, 14].Value?.ToString() ?? "",
+                                SpontenComGroupTask = worksheet.Cells[row, 15].Value?.ToString() ?? "",
+                                Debate = worksheet.Cells[row, 16].Value?.ToString() ?? "",
+                                Performance = worksheet.Cells[row, 17].Value?.ToString() ?? "",
+                                AttendBookReview = worksheet.Cells[row, 18].Value?.ToString() ?? "",
+                                AssignmentFacilitators = worksheet.Cells[row, 19].Value?.ToString() ?? "",
+                                Total = double.TryParse(worksheet.Cells[row, 20].Value?.ToString(), out double total) ? total : 0.0,
+                                Obtained = double.TryParse(worksheet.Cells[row, 21].Value?.ToString(), out double obtained) ? obtained : 0.0,
+                                Percentage = double.TryParse(worksheet.Cells[row, 23].Value?.ToString(), out double percentage)
+                                    ? Math.Round(percentage, 0).ToString("0") + "%"  // Round off to no decimal
+                                    : "0%", // Ensure default format
                                 Result = worksheet.Cells[row, 24].Value?.ToString() ?? "",
                                 Grade = worksheet.Cells[row, 25].Value?.ToString() ?? "",
-                          
                             };
 
                             students.Add(student);
@@ -80,7 +83,6 @@ namespace Result.Controllers
                             Console.WriteLine($"Error processing row {row}: {ex.Message}");
                         }
                     }
-
                 }
             }
             catch (FileNotFoundException ex)
@@ -108,10 +110,9 @@ namespace Result.Controllers
                 return View("Index"); // Or display an error message
             }
 
-            // Search by first name or last name
-            var studentResults = _students.Where(s =>
-                s.StudentName.Contains(studentName, StringComparison.OrdinalIgnoreCase)
-            ).ToList();
+            var studentResults = _students
+                .Where(s => s.StudentName.Contains(studentName, StringComparison.OrdinalIgnoreCase))
+                .ToList();
 
             if (studentResults == null || studentResults.Count == 0)
             {
@@ -119,7 +120,7 @@ namespace Result.Controllers
                 return View("Index");
             }
 
-            return View("SearchResults", studentResults); // Pass the list to a new view
+            return View("SearchResults", studentResults);
         }
     }
 }
