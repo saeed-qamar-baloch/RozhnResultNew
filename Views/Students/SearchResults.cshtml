@@ -2,106 +2,148 @@
 
 @{
     ViewData["Title"] = "Search Results";
+    var studentIndex = 0;
 }
 
-<style>
-    body {
-        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        background-color: #f8f9fa;
-        color: #333;
-    }
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>@ViewData["Title"]</title>
 
-    .container {
-        max-width: 1100px;
-        margin: 0 auto;
-        padding: 20px;
-    }
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, sans-serif;
+            background-color: #f0f2f5;
+            padding: 30px;
+        }
 
-    h1 {
-        color: #007bff;
-        margin-bottom: 30px;
-        font-size: 28px;
-        font-weight: 700;
-        text-align: center;
-    }
+        .result-card {
+            max-width: 600px;
+            margin: 40px auto;
+            background-color: #ffffff;
+            border-radius: 15px;
+            padding: 30px 25px;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+            position: relative;
+        }
 
-    table {
-        width: 100%;
-        background-color: #fff;
-        border-collapse: collapse;
-        margin-bottom: 40px;
-        border-radius: 10px;
-        overflow: hidden;
-        box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-    }
+        .logo {
+            text-align: center;
+            margin-bottom: 15px;
+        }
 
-    th, td {
-        padding: 10px 15px;
-        text-align: left;
-        font-size: 15px;
-        border-bottom: 1px solid #dee2e6;
-    }
+        .logo img {
+            height: 100px;
+        }
 
-    th {
-        width: 30%;
-        background-color: #f1f1f1;
-        color: #333;
-        font-weight: 600;
-    }
+        .header {
+            text-align: center;
+            font-size: 24px;
+            font-weight: bold;
+            color: #003366;
+            margin-bottom: 10px;
+        }
 
-    td {
-        color: #555;
-    }
+        .sub-header {
+            text-align: center;
+            font-size: 15px;
+            color: #444;
+            margin-bottom: 20px;
+        }
 
-    .student-name-header {
-        background-color: #28a745;
-        color: #fff;
-        font-size: 20px;
-        font-weight: bold;
-        text-align: center;
-        padding: 12px;
-    }
-
-    .highlight {
-        color: #dc3545;
-        font-weight: bold;
-    }
-
-    .no-results {
-        font-size: 18px;
-        text-align: center;
-        color: #6c757d;
-        margin-top: 30px;
-    }
-
-    media (max-width: 768px) {
-        th, td {
+        .info {
             font-size: 14px;
-            padding: 8px 10px;
+            margin-bottom: 20px;
         }
 
-        .student-name-header {
-            font-size: 18px;
+        .info p {
+            margin: 3px 0;
         }
-    }
-</style>
 
-<div class="container">
-    <h1>Rozhn Terminal Result 2025 - Search Results</h1>
+        .marks-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+            font-size: 14px;
+        }
 
-    @if (Model != null && Model.Count > 0)
+        .marks-table th,
+        .marks-table td {
+            border: 1px solid #ccc;
+            padding: 8px 12px;
+            text-align: left;
+        }
+
+        .marks-table th {
+            width: 60%;
+            background-color: #f1f9ff;
+            font-weight: bold;
+        }
+
+        .highlight-result {
+            background-color: #ffe6e6;
+            color: #d80000;
+            font-weight: bold;
+        }
+
+        .footer {
+            text-align: center;
+            font-size: 12px;
+            color: #666;
+            border-top: 1px dashed #bbb;
+            padding-top: 8px;
+        }
+
+        .download-btn {
+            display: block;
+            margin: 15px auto 35px auto;
+            background-color: #007bff;
+            color: white;
+            padding: 10px 22px;
+            border: none;
+            border-radius: 6px;
+            font-size: 14px;
+            cursor: pointer;
+        }
+
+        media screen and (max-width: 600px) {
+            .result-card {
+                padding: 20px 15px;
+            }
+
+            .header {
+                font-size: 20px;
+            }
+
+            .logo img {
+                height: 80px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    @foreach (var student in Model)
     {
-        foreach (var student in Model)
-        {
-            <table>
-                <tr>
-                    <td colspan="2" class="student-name-header">@student.StudentName</td>
-                </tr>
-                <tr><th>Father</th><td>@student.Father</td></tr>
-                <tr><th>Serial</th><td>@student.Serial</td></tr>
-                <tr><th>Term No</th><td>@student.TermNo</td></tr>
-                <tr><th>Teacher</th><td>@student.Teacher</td></tr>
-                <tr><th>Class</th><td>@student.Class</td></tr>
+        var cardId = "card_" + studentIndex;
+        <div class="result-card" id="@cardId">
+            <div class="logo">
+                <img src="/images/rozhn-logo.png" alt="Rozhn Logo" />
+            </div>
+
+            <div class="header">Rozhn Institute Terminal Result</div>
+            <div class="sub-header">Term : March-June-25 - Class: @student.Class</div>
+
+            <div class="info">
+                <p><strong>Name:</strong> @student.StudentName</p>
+                <p><strong>Father's Name:</strong> @student.Father</p>
+                <p><strong>Teacher:</strong> @student.Teacher</p>
+                <p><strong>Term No:</strong> @student.TermNo</p>
+                <p><strong>Serial:</strong> @student.Serial</p>
+            </div>
+
+            <table class="marks-table">
                 <tr><th>1st Month</th><td>@student.Month1</td></tr>
                 <tr><th>2nd Month</th><td>@student.Month2</td></tr>
                 <tr><th>Written</th><td>@student.Written</td></tr>
@@ -112,19 +154,45 @@
                 <tr><th>Spontaneous Communication</th><td>@student.SpontenousCom</td></tr>
                 <tr><th>Group Task / Surprise Test</th><td>@student.GroupTaskSurpriseTest</td></tr>
                 <tr><th>Debate</th><td>@student.Debate</td></tr>
-                <tr><th>Performance</th><td>@student.Performance</td></tr>
                 <tr><th>Book Review</th><td>@student.BookReview</td></tr>
-                <tr><th>Attendance</th><td>@student.Attendance</td></tr>
                 <tr><th>Assignment</th><td>@student.Assignment</td></tr>
+                <tr><th>Attendance</th><td>@student.Attendance</td></tr>
                 <tr><th>Total Marks</th><td>@student.Total</td></tr>
-                <tr><th>Obtained</th><td>@student.Obtained</td></tr>
-                <tr><th>Percentage</th><td class="highlight">@student.Percentage</td></tr>
-                <tr><th>Result</th><td class="highlight">@student.Result</td></tr>
+                <tr><th>Obtained Marks</th><td>@student.Obtained</td></tr>
+                <tr><th>Percentage</th><td>@student.Percentage %</td></tr>
+                <tr class="highlight-result"><th>Result</th><td>@student.Result</td></tr>
             </table>
+
+            <div class="footer">
+                This result is system-generated and issued by Rozhn Institute Kohi Goth.
+            </div>
+        </div>
+
+        <button class="download-btn" onclick="downloadImage('@cardId', '@student.StudentName')">Download Result Image</button>
+
+        studentIndex++;
+    }
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script>
+        function downloadImage(cardId, studentName) {
+            const card = document.getElementById(cardId);
+            const button = card.nextElementSibling;
+            if (button) button.style.display = 'none';
+
+            html2canvas(card, {
+                scale: 2,
+                backgroundColor: "#ffffff"
+            }).then(canvas => {
+                if (button) button.style.display = 'block';
+
+                const link = document.createElement('a');
+                link.download = studentName.replace(/\s+/g, '_') + '_Result.png';
+                link.href = canvas.toDataURL("image/png");
+                link.click();
+            });
         }
-    }
-    else
-    {
-        <p class="no-results">No results found.</p>
-    }
-</div>
+    </script>
+
+</body>
+</html>
