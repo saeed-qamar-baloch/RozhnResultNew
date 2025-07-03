@@ -61,19 +61,22 @@ namespace Result.Controllers
                                 Written = worksheet.Cells[row, 11].Value?.ToString() ?? "",
                                 Wordlist = worksheet.Cells[row, 12].Value?.ToString() ?? "",
                                 Viva = worksheet.Cells[row, 13].Value?.ToString() ?? "",
-                                PresentConver = worksheet.Cells[row, 14].Value?.ToString() ?? "",
-                                SpontenComGroupTask = worksheet.Cells[row, 15].Value?.ToString() ?? "",
-                                Debate = worksheet.Cells[row, 16].Value?.ToString() ?? "",
-                                Performance = worksheet.Cells[row, 17].Value?.ToString() ?? "",
-                                AttendBookReview = worksheet.Cells[row, 18].Value?.ToString() ?? "",
-                                AssignmentFacilitators = worksheet.Cells[row, 19].Value?.ToString() ?? "",
-                                Total = double.TryParse(worksheet.Cells[row, 20].Value?.ToString(), out double total) ? total : 0.0,
-                                Obtained = double.TryParse(worksheet.Cells[row, 21].Value?.ToString(), out double obtained) ? obtained : 0.0,
-                                Percentage = double.TryParse(worksheet.Cells[row, 23].Value?.ToString(), out double percentage)
+                                Present = worksheet.Cells[row, 14].Value?.ToString() ?? "",
+                                conversation = worksheet.Cells[row, 15].Value?.ToString() ?? "",
+                                SpontenousCom = worksheet.Cells[row, 16].Value?.ToString() ?? "",
+                                GroupTaskSurpriseTest = worksheet.Cells[row, 17].Value?.ToString() ?? "",
+                                Debate = worksheet.Cells[row, 18].Value?.ToString() ?? "",
+                                Performance = worksheet.Cells[row, 19].Value?.ToString() ?? "",
+                                BookReview = worksheet.Cells[row, 20].Value?.ToString() ?? "",
+                                Attendance = worksheet.Cells[row, 21].Value?.ToString() ?? "",
+                                Assignment = worksheet.Cells[row, 22].Value?.ToString() ?? "",
+                                Total = double.TryParse(worksheet.Cells[row, 24].Value?.ToString(), out double total) ? total : 0.0,
+                                Obtained = double.TryParse(worksheet.Cells[row, 25].Value?.ToString(), out double obtained) ? obtained : 0.0,
+                                Percentage = double.TryParse(worksheet.Cells[row, 27].Value?.ToString(), out double percentage)
                                     ? Math.Round(percentage, 0).ToString("0") + "%"  // Round off to no decimal
                                     : "0%", // Ensure default format
-                                Result = worksheet.Cells[row, 24].Value?.ToString() ?? "",
-                                Grade = worksheet.Cells[row, 25].Value?.ToString() ?? "",
+                                Result = worksheet.Cells[row, 28].Value?.ToString() ?? "",
+                            
                             };
 
                             students.Add(student);

@@ -5,7 +5,6 @@
 }
 
 <style>
-    /* General Styles */
     body {
         font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         background-color: #f8f9fa;
@@ -13,115 +12,115 @@
     }
 
     .container {
-        max-width: 900px;
+        max-width: 1100px;
         margin: 0 auto;
         padding: 20px;
-        text-align: center;
     }
 
     h1 {
         color: #007bff;
-        margin-bottom: 20px;
+        margin-bottom: 30px;
         font-size: 28px;
         font-weight: 700;
-    }
-
-    /* Student Card Styles */
-    .student-card {
-        background-color: #fff;
-        border-radius: 10px;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        padding: 20px;
-        margin-bottom: 20px;
-        transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
-        text-align: left;
-    }
-
-    .student-card:hover {
-        transform: translateY(-5px);
-        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
-    }
-
-    .student-card h4 {
-        color: #28a745;
-        margin-bottom: 10px;
-        font-size: 22px;
         text-align: center;
     }
 
-    .student-card p {
-        margin: 6px 0;
-        font-size: 16px;
-        line-height: 1.4;
+    table {
+        width: 100%;
+        background-color: #fff;
+        border-collapse: collapse;
+        margin-bottom: 40px;
+        border-radius: 10px;
+        overflow: hidden;
+        box-shadow: 0 4px 10px rgba(0,0,0,0.1);
     }
 
-    .student-card strong {
+    th, td {
+        padding: 10px 15px;
+        text-align: left;
+        font-size: 15px;
+        border-bottom: 1px solid #dee2e6;
+    }
+
+    th {
+        width: 30%;
+        background-color: #f1f1f1;
+        color: #333;
         font-weight: 600;
+    }
+
+    td {
         color: #555;
     }
 
-    /* Highlighted Text */
-    .highlight {
+    .student-name-header {
+        background-color: #28a745;
+        color: #fff;
+        font-size: 20px;
         font-weight: bold;
-        color: #dc3545;
+        text-align: center;
+        padding: 12px;
     }
 
-    /* No Results Message */
+    .highlight {
+        color: #dc3545;
+        font-weight: bold;
+    }
+
     .no-results {
         font-size: 18px;
         text-align: center;
         color: #6c757d;
-        margin-top: 20px;
+        margin-top: 30px;
     }
 
-    /* Responsive Design */
     media (max-width: 768px) {
-        .container {
-            padding: 10px;
-        }
-
-        .student-card {
-            padding: 15px;
-        }
-
-        .student-card h4 {
-            font-size: 20px;
-        }
-
-        .student-card p {
+        th, td {
             font-size: 14px;
+            padding: 8px 10px;
+        }
+
+        .student-name-header {
+            font-size: 18px;
         }
     }
 </style>
 
 <div class="container">
-    <h1>Rozhn Terminal Result 2025</h1>
-    <h1>Search Results</h1>
+    <h1>Rozhn Terminal Result 2025 - Search Results</h1>
 
     @if (Model != null && Model.Count > 0)
     {
-        @foreach (var student in Model)
+        foreach (var student in Model)
         {
-            <div class="student-card">
-                <h4>@student.StudentName</h4>
-                <p><strong>Father:</strong> @student.Father</p>
-                <p><strong>Serial:</strong> @student.Serial</p>
-                <p><strong>Term No:</strong> @student.TermNo</p>
-                <p><strong>1st Month:</strong> @student.Month1</p>
-                <p><strong>2nd Month:</strong> @student.Month2</p>
-                <p><strong>Viva:</strong> @student.Viva</p>
-                <p><strong>Attendance/ Book Review:</strong> @student.AttendBookReview</p>
-                <p><strong>Assignments:</strong> @student.AssignmentFacilitators</p>
-                <p><strong>Debate:</strong> @student.Debate</p>
-                <p><strong>Performance:</strong> @student.Performance</p>
-                <p><strong>Written:</strong> @student.Written</p>
-                <p><strong>Wordlist:</strong> @student.Wordlist</p>
-                <p><strong>Total Marks:</strong> @student.Total</p>
-                <p><strong>Obtained:</strong> @student.Obtained</p>
-                <p><strong>Percentage:</strong> <span class="highlight">@student.Percentage</span></p>
-                <p><strong>Result:</strong> <span class="highlight">@student.Result</span></p>
-                <p><strong>Grade:</strong> @student.Grade</p>
-            </div>
+            <table>
+                <tr>
+                    <td colspan="2" class="student-name-header">@student.StudentName</td>
+                </tr>
+                <tr><th>Father</th><td>@student.Father</td></tr>
+                <tr><th>Serial</th><td>@student.Serial</td></tr>
+                <tr><th>Term No</th><td>@student.TermNo</td></tr>
+                <tr><th>Teacher</th><td>@student.Teacher</td></tr>
+                <tr><th>Class</th><td>@student.Class</td></tr>
+                <tr><th>1st Month</th><td>@student.Month1</td></tr>
+                <tr><th>2nd Month</th><td>@student.Month2</td></tr>
+                <tr><th>Written</th><td>@student.Written</td></tr>
+                <tr><th>Wordlist</th><td>@student.Wordlist</td></tr>
+                <tr><th>Viva</th><td>@student.Viva</td></tr>
+                <tr><th>Presentation</th><td>@student.Present</td></tr>
+                <tr><th>Conversation</th><td>@student.conversation</td></tr>
+                <tr><th>Spontaneous Communication</th><td>@student.SpontenousCom</td></tr>
+                <tr><th>Group Task / Surprise Test</th><td>@student.GroupTaskSurpriseTest</td></tr>
+                <tr><th>Debate</th><td>@student.Debate</td></tr>
+                <tr><th>Performance</th><td>@student.Performance</td></tr>
+                <tr><th>Book Review</th><td>@student.BookReview</td></tr>
+                <tr><th>Attendance</th><td>@student.Attendance</td></tr>
+                <tr><th>Assignment</th><td>@student.Assignment</td></tr>
+                <tr><th>Total Marks</th><td>@student.Total</td></tr>
+                <tr><th>Obtained</th><td>@student.Obtained</td></tr>
+                <tr><th>Percentage</th><td class="highlight">@student.Percentage</td></tr>
+                <tr><th>Result</th><td class="highlight">@student.Result</td></tr>
+            </table>
         }
     }
     else
