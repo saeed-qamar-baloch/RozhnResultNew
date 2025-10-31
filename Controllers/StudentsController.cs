@@ -114,12 +114,12 @@ namespace Result.Controllers
             }
 
             var studentResults = _students
-                .Where(s => s.StudentName.Contains(studentName, StringComparison.OrdinalIgnoreCase))
+                .Where(s => s.Serial.Equals(studentName, StringComparison.OrdinalIgnoreCase))
                 .ToList();
 
             if (studentResults == null || studentResults.Count == 0)
             {
-                ViewBag.ErrorMessage = "No student found with that name.";
+                ViewBag.ErrorMessage = "No student found with that ID.";
                 return View("Index");
             }
 
