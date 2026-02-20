@@ -76,6 +76,7 @@ namespace Result.Controllers
                                     ? Math.Round(percentage, 0).ToString("0") + "%"  // Round off to no decimal
                                     : "0%", // Ensure default format
                                 Result = worksheet.Cells[row, 28].Value?.ToString() ?? "",
+                                Unpaids = int.TryParse(worksheet.Cells[row, 29].Value?.ToString(), out var unpaids) ? unpaids : 0,
                             
                             };
 
@@ -120,6 +121,12 @@ namespace Result.Controllers
             if (studentResults == null || studentResults.Count == 0)
             {
                 ViewBag.ErrorMessage = "No student found with that ID.";
+                return View("Index");
+            }
+
+            if (studentResults.Any(s => s.Unpaids > 1))
+            {
+                ViewBag.ErrorMessage = "Your fee is unpaid for more than 1 months. Kindly pay your fee to see the result.";
                 return View("Index");
             }
 

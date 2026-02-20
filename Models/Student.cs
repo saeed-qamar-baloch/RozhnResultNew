@@ -27,6 +27,7 @@ namespace Result.Models
         public string Percentage { get; set; }
         public string Performance { get; set; }
         public string Result { get; set; }
+        public int Unpaids { get; set; }
         public string PassingPercentage { get; set; }
         public string Grade { get; set; }
         public string Present { get; set; } public string conversation { get; set; }public string SpontenousCom { get; set; }public string GroupTaskSurpriseTest { get; set; }public string BookReview { get; set; }

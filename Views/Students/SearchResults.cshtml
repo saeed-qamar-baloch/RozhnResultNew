@@ -5,6 +5,15 @@
     var studentIndex = 0;
 }
 
+@functions {
+    private static bool ShowValue(object? value)
+    {
+        var trimmed = Convert.ToString(value)?.Trim();
+        return !string.Equals(trimmed, "NI", StringComparison.OrdinalIgnoreCase)
+            && !string.Equals(trimmed, "NC", StringComparison.OrdinalIgnoreCase);
+    }
+}
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -133,7 +142,7 @@
             </div>
 
             <div class="header">Rozhn Institute Terminal Result</div>
-            <div class="sub-header">Term : Aug-Oct-25 - Class: @student.Class</div>
+            <div class="sub-header">Term : Dec-Feb-26  - Class: @student.Class</div>
 
             <div class="info">
                 <p><strong>Name:</strong> @student.StudentName</p>
@@ -144,23 +153,74 @@
             </div>
 
             <table class="marks-table">
-                <tr><th>1st Month</th><td>@student.Month1</td></tr>
-                <tr><th>2nd Month</th><td>@student.Month2</td></tr>
-                <tr><th>Written</th><td>@student.Written</td></tr>
-                <tr><th>Wordlist</th><td>@student.Wordlist</td></tr>
-                <tr><th>Viva</th><td>@student.Viva</td></tr>
-                <tr><th>Presentation</th><td>@student.Present</td></tr>
-                <tr><th>Conversation</th><td>@student.conversation</td></tr>
-                <tr><th>Spontaneous Communication</th><td>@student.SpontenousCom</td></tr>
-                <tr><th>Group Task / Surprise Test</th><td>@student.GroupTaskSurpriseTest</td></tr>
-                <tr><th>Debate</th><td>@student.Debate</td></tr>
-                <tr><th>Book Review</th><td>@student.BookReview</td></tr>
-                <tr><th>Assignment</th><td>@student.Assignment</td></tr>
-                <tr><th>Attendance</th><td>@student.Attendance</td></tr>
-                <tr><th>Total Marks</th><td>@student.Total</td></tr>
-                <tr><th>Obtained Marks</th><td>@student.Obtained</td></tr>
-                <tr><th>Percentage</th><td>@student.Percentage </td></tr>
-                <tr class="highlight-result"><th>Result</th><td>@student.Result</td></tr>
+                @if (ShowValue(student.Month1))
+                {
+                    <tr><th>1st Month</th><td>@student.Month1</td></tr>
+                }
+                @if (ShowValue(student.Month2))
+                {
+                    <tr><th>2nd Month</th><td>@student.Month2</td></tr>
+                }
+                @if (ShowValue(student.Written))
+                {
+                    <tr><th>Written</th><td>@student.Written</td></tr>
+                }
+                @if (ShowValue(student.Wordlist))
+                {
+                    <tr><th>Wordlist</th><td>@student.Wordlist</td></tr>
+                }
+                @if (ShowValue(student.Viva))
+                {
+                    <tr><th>Viva</th><td>@student.Viva</td></tr>
+                }
+                @if (ShowValue(student.Present))
+                {
+                    <tr><th>Presentation</th><td>@student.Present</td></tr>
+                }
+                @if (ShowValue(student.conversation))
+                {
+                    <tr><th>Conversation</th><td>@student.conversation</td></tr>
+                }
+                @if (ShowValue(student.SpontenousCom))
+                {
+                    <tr><th>Spontaneous Communication</th><td>@student.SpontenousCom</td></tr>
+                }
+                @if (ShowValue(student.GroupTaskSurpriseTest))
+                {
+                    <tr><th>Group Task / Surprise Test</th><td>@student.GroupTaskSurpriseTest</td></tr>
+                }
+                @if (ShowValue(student.Debate))
+                {
+                    <tr><th>Debate</th><td>@student.Debate</td></tr>
+                }
+                @if (ShowValue(student.BookReview))
+                {
+                    <tr><th>Book Review</th><td>@student.BookReview</td></tr>
+                }
+                @if (ShowValue(student.Assignment))
+                {
+                    <tr><th>Assignment</th><td>@student.Assignment</td></tr>
+                }
+                @if (ShowValue(student.Attendance))
+                {
+                    <tr><th>Attendance</th><td>@student.Attendance</td></tr>
+                }
+                @if (ShowValue(student.Total))
+                {
+                    <tr><th>Total Marks</th><td>@student.Total</td></tr>
+                }
+                @if (ShowValue(student.Obtained))
+                {
+                    <tr><th>Obtained Marks</th><td>@student.Obtained</td></tr>
+                }
+                @if (ShowValue(student.Percentage))
+                {
+                    <tr><th>Percentage</th><td>@student.Percentage </td></tr>
+                }
+                @if (ShowValue(student.Result))
+                {
+                    <tr class="highlight-result"><th>Result</th><td>@student.Result</td></tr>
+                }
             </table>
 
             <div class="footer">
